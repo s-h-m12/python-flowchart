@@ -9,6 +9,7 @@ class PythonASTParser:
         self.filename = filename
         self.tree: ast.Module | None = None
 
+    # Построение ast древа через метод ast.parse
     def parse(self) -> ast.Module | None:
         self.tree = None
         try:
@@ -23,8 +24,17 @@ class PythonASTParser:
             )
         return self.tree
 
+    # Получение списка нодов из self.tree
     def get_statements(self) -> list[ast.stmt]:
         if self.tree is None:
             raise RuntimeError("Сначала необходимо выполнить parse()")
 
         return self.tree.body
+
+    def get_source_segment(self, node: ast.AST) -> str:
+        segment = ast.get_source_segment(self.source_code, node)
+
+        if segment is None:
+            raise ValueError("Возникла ошибка сопоставления кода с указанным нодом")
+
+        return segment
