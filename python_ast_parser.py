@@ -31,6 +31,7 @@ class PythonASTParser:
 
         return self.tree.body
 
+    # Сопоставление нода с кодом
     def get_source_segment(self, node: ast.AST) -> str:
         segment = ast.get_source_segment(self.source_code, node)
 
