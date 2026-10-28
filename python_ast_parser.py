@@ -38,3 +38,10 @@ class PythonASTParser:
             raise ValueError("Возникла ошибка сопоставления кода с указанным нодом")
 
         return segment
+
+    # Возвращает форматированную строку кода из древа
+    def format_ast(self) -> str:
+        if self.tree is None:
+            raise RuntimeError("Сначала необходимо выполнить parse()")
+
+        return ast.dump(node=self.tree, indent=4, include_attributes=False)
